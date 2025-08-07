@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { findLocationById } from '../../data/locations'
+
+// URLパラメータから活動地IDを取得
+const { id } = Astro.params
+
+// 活動地データを取得
+const location = findLocationById(id || '')
+
+// 活動地が見つからない場合は404ページにリダイレクト
+if (!location) {
+  return Astro.redirect('/404')
+}
+---
+
+<Layout title={`${location.name} - 活動地詳細`}>
+  <div class="mx-auto max-w-4xl">
+    <!-- パンくずリスト -->
+    <nav class="mb-6 text-sm text-gray-600">
+      <a href="/locations" class="hover:text-primary-600">活動地紹介</a>
+      <span class="mx-2">/</span>
+      <span>{location.name}</span>
+    </nav>
+
+    <!-- 活動地詳細 -->
+    <div class="mb-8">
+      <h1 class="mb-6 text-3xl font-bold">{location.name}</h1>
+
+      <!-- メイン画像 -->
+      <div class="mb-8">
+        <img
+          src={location.image ||
+            'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=60'}
+          alt={location.name}
+          class="h-96 w-full rounded-lg object-cover shadow-lg"
+        />
+      </div>
+
+      <!-- 基本情報 -->
+      <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
+        <div>
+          <h2 class="mb-4 text-xl font-bold text-gray-800">活動地について</h2>
+          <p class="leading-relaxed text-gray-700">{location.description}</p>
+          {
+            location.detailInfo && (
+              <div class="mt-4">
+                <h3 class="mb-2 text-lg font-semibold text-gray-800">歴史・背景</h3>
+                <p class="leading-relaxed text-gray-700">{location.detailInfo.history}</p>
+              </div>
+            )
+          }
+        </div>
+
+        <div>
+          <h2 class="mb-4 text-xl font-bold text-gray-800">基本情報</h2>
+          <div class="space-y-3">
+            <div>
+              <span class="font-semibold text-gray-700">住所：</span>
+              <span class="text-gray-600">{location.address || '情報なし'}</span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">活動タイプ：</span>
+              <span class="text-gray-600">
+                {location.type === 'regular' ? '定例活動地' : '共同活動地'}
+              </span>
+            </div>
+            <div>
+              <span class="font-semibold text-gray-700">座標：</span>
+              <span class="text-gray-600">
+                {location.position[0].toFixed(4)}, {location.position[1].toFixed(4)}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 詳細情報 -->
+      {
+        location.detailInfo && (
+          <div class="mb-8">
+            <h2 class="mb-6 text-2xl font-bold text-gray-800">詳細情報</h2>
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div class="space-y-6">
+                <div>
+                  <h3 class="mb-2 text-lg font-semibold text-gray-800">アクセス</h3>
+                  <p class="text-gray-700">{location.detailInfo.access}</p>
+                </div>
+                <div>
+                  <h3 class="mb-2 text-lg font-semibold text-gray-800">施設</h3>
+                  <p class="text-gray-700">{location.detailInfo.facilities}</p>
+                </div>
+                <div>
+                  <h3 class="mb-2 text-lg font-semibold text-gray-800">活動スケジュール</h3>
+                  <p class="text-gray-700">{location.detailInfo.schedule}</p>
+                </div>
+              </div>
+              <div class="space-y-6">
+                <div>
+                  <h3 class="mb-2 text-lg font-semibold text-gray-800">必要な持ち物</h3>
+                  <p class="text-gray-700">{location.detailInfo.requirements}</p>
+                </div>
+                <div>
+                  <h3 class="mb-2 text-lg font-semibold text-gray-800">お問い合わせ</h3>
+                  <p class="text-gray-700">{location.detailInfo.contact}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      <!-- 活動内容 -->
+      {
+        location.activities && location.activities.length > 0 && (
+          <div class="mb-8">
+            <h2 class="mb-4 text-xl font-bold text-gray-800">主な活動内容</h2>
+            <div class="bg-primary-50 rounded-lg p-6">
+              <ul class="space-y-2">
+                {location.activities.map((activity) => (
+                  <li class="flex items-start">
+                    <span class="text-primary-600 mt-1 mr-3">•</span>
+                    <span class="text-gray-700">{activity}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )
+      }
+
+      <!-- ギャラリー -->
+      {
+        location.detailInfo &&
+          location.detailInfo.gallery &&
+          location.detailInfo.gallery.length > 0 && (
+            <div class="mb-8">
+              <h2 class="mb-4 text-xl font-bold text-gray-800">活動写真</h2>
+              <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                {location.detailInfo.gallery.map((image, index) => (
+                  <div class="overflow-hidden rounded-lg shadow-md">
+                    <img
+                      src={image}
+                      alt={`${location.name}の活動写真 ${index + 1}`}
+                      class="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+      }
+
+      <!-- アクションボタン -->
+      <div class="mb-8 flex flex-wrap gap-4">
+        <a
+          href="/schedule"
+          class="bg-primary-600 hover:bg-primary-700 rounded-lg px-6 py-3 text-white transition-colors"
+        >
+          活動予定を確認
+        </a>
+        <a
+          href="/contact"
+          class="border-primary-600 text-primary-600 hover:bg-primary-50 rounded-lg border bg-white px-6 py-3 transition-colors"
+        >
+          活動に参加する
+        </a>
+      </div>
+    </div>
+
+    <!-- 戻るボタン -->
+    <div class="text-center">
+      <a
+        href="/locations"
+        class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-gray-700 transition-colors hover:bg-gray-50"
+      >
+        <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+        活動地一覧に戻る
+      </a>
+    </div>
+  </div>
+</Layout>

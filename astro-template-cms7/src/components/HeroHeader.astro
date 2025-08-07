@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string
+  subtitle?: string
+}
+
+const {
+  title = 'NPO法人\n日本森林ボランティア協会へようこそ',
+  subtitle = '自然と人々のつながりを大切に、森林の保全活動を行っています'
+} = Astro.props
+---
+
+<div class="bg-header relative">
+  <div class="absolute inset-0 z-10 bg-black/15"></div>
+  <div class="relative z-20">
+    <slot name="navigation" />
+    <div class="container mx-auto px-4 py-32 text-center">
+      <div class="inline-block text-left">
+        <h1 class="mb-4 text-4xl font-bold text-white md:text-6xl">
+          {title}
+        </h1>
+      </div>
+      <p class="text-xl text-white">
+        {subtitle}
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bg-header {
+    background-image: url('/images/header-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 400px;
+  }
+</style>

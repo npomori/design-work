@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout title="画像テスト">
+  <div class="mx-auto max-w-4xl p-8">
+    <h1 class="mb-6 text-2xl font-bold">画像背景テスト</h1>
+
+    <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div class="rounded bg-red-500 p-4">
+        <h3 class="mb-2 font-medium text-white">赤い背景でテスト</h3>
+        <img
+          src="/images/spring-planting.jpg"
+          alt="植樹"
+          class="h-64 w-full object-contain"
+          style="background-color: transparent;"
+        />
+      </div>
+
+      <div class="rounded bg-blue-500 p-4">
+        <h3 class="mb-2 font-medium text-white">青い背景でテスト</h3>
+        <img
+          src="/images/participant1.jpg"
+          alt="参加者1"
+          class="h-64 w-full object-contain"
+          style="background-color: transparent;"
+        />
+      </div>
+
+      <div class="bg-primary-500 rounded p-4">
+        <h3 class="mb-2 font-medium text-white">緑の背景でテスト</h3>
+        <img
+          src="/images/forest-maintenance.jpg"
+          alt="整備"
+          class="h-64 w-full object-contain"
+          style="background-color: transparent;"
+        />
+      </div>
+
+      <div class="rounded bg-yellow-500 p-4">
+        <h3 class="mb-2 font-medium text-white">黄色の背景でテスト</h3>
+        <img
+          src="/images/album1.jpg"
+          alt="アルバム1"
+          class="h-64 w-full object-contain"
+          style="background-color: transparent;"
+        />
+      </div>
+    </div>
+
+    <div class="mt-8 rounded bg-gray-100 p-4">
+      <h2 class="mb-2 text-lg font-medium">テスト結果</h2>
+      <p class="text-sm text-gray-600">
+        上記の画像で背景が透明になっているか確認してください。<br />
+        もし画像の背景が黒いままなら、画像ファイル自体に黒い背景が含まれています。
+      </p>
+    </div>
+  </div>
+</Layout>

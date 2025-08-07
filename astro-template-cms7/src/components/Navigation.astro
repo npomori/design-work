@@ -1,0 +1,106 @@
+---
+import UserMenu from './partials/UserMenu.astro'
+import SearchMenu from './partials/SearchMenu.astro'
+import menuData from '../config/menu.json'
+---
+
+<nav class="bg-primary-800/90 fixed top-0 right-0 left-0 z-50 backdrop-blur-sm">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-8">
+        <a href="/" class="flex items-center text-2xl font-bold text-white">
+          <i class="fas fa-tree mr-2 text-3xl"></i>
+          日本森林ボランティア協会
+        </a>
+      </div>
+      <!-- モバイルメニューボタン -->
+      <button id="mobile-menu-button" class="text-white md:hidden" aria-label="メニュー">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+      <!-- デスクトップメニュー -->
+      <ul class="hidden space-x-6 md:flex">
+        {
+          menuData.desktopMenu.map((item) => (
+            <li class={item.type === 'dropdown' ? 'group relative' : ''}>
+              {item.type === 'dropdown' ? (
+                <>
+                  <button class="hover:text-primary-200 flex items-center text-white">
+                    {item.label}
+                    <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </button>
+                  <ul class="bg-primary-800 absolute hidden min-w-[200px] py-2 group-hover:block">
+                    {item.children?.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class="hover:bg-primary-700 block px-4 py-2 text-white"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <a href={item.href} class="hover:text-primary-200 text-white">
+                  {item.label}
+                </a>
+              )}
+            </li>
+          ))
+        }
+        <SearchMenu variant="desktop" />
+        <UserMenu variant="desktop" />
+      </ul>
+    </div>
+    <!-- モバイルメニュー -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <ul class="mt-4 space-y-4">
+        {
+          menuData.mobileMenu.map((item) => (
+            <li>
+              <a href={item.href} class="hover:text-primary-200 block text-white">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+
+        <UserMenu variant="mobile" />
+
+        <SearchMenu variant="mobile" />
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // モバイルメニューの開閉
+  const mobileMenuButton = document.getElementById('mobile-menu-button')
+  const mobileMenu = document.getElementById('mobile-menu')
+
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden')
+  })
+
+  // メニュー項目をクリックしたらメニューを閉じる
+  const mobileMenuLinks = mobileMenu?.querySelectorAll('a')
+  mobileMenuLinks?.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden')
+    })
+  })
+</script>

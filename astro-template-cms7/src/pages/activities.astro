@@ -1,0 +1,210 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ImageModal from '../components/ImageModal.tsx'
+
+// 活動記録データ（指定フォーマット）
+const activities = [
+  {
+    date: '2024-03-15',
+    title: '定例活動',
+    location: '奥多摩町 森林公園',
+    datetime: '2024年3月15日（金）9:00～15:00',
+    weather: '晴れ、気温12℃、湿度45%',
+    participants: '総勢48名（一般参加者35名、スタッフ13名）',
+    reporter: '田中 正義（活動リーダー）',
+    content: 'コナラ、クヌギの苗木100本を植樹。植樹後の水やり作業。参加者への森林保全の重要性について説明。記念撮影と交流会。',
+    nearMiss: '参加者の1名が斜面で滑りそうになったが、事前の安全指導により未然に防げた。次回はより安全な場所での活動を検討。',
+    category: '植樹活動',
+    thumbnails: [
+      '/images/spring-planting.jpg',
+      '/images/participant1.jpg',
+      '/images/participant2.jpg',
+      '/images/participant3.jpg'
+    ]
+  },
+  {
+    date: '2024-03-20',
+    title: '定例活動',
+    location: '秩父市 森林整備エリア',
+    datetime: '2024年3月20日（水）8:30～16:00',
+    weather: '曇り、気温8℃、湿度60%',
+    participants: '総勢32名（ボランティア25名、スタッフ7名）',
+    reporter: '佐藤 美咲（整備リーダー）',
+    content: '下草刈り作業（面積：2ha）。枝打ち作業（高さ2m以下）。倒木の除去と整理。作業後の安全確認。',
+    nearMiss: 'なし（安全に作業完了）',
+    category: '整備活動',
+    thumbnails: [
+      '/images/forest-maintenance.jpg',
+      '/images/album1.jpg',
+      '/images/album2.jpg',
+      '/images/album3.jpg'
+    ]
+  },
+  {
+    date: '2024-02-10',
+    title: '定例活動',
+    location: '高尾山 自然観察路',
+    datetime: '2024年2月10日（土）10:00～14:00',
+    weather: '晴れ、気温3℃、湿度30%',
+    participants: '総勢22名（一般参加者18名、ガイド4名）',
+    reporter: '山本 健一（自然観察リーダー）',
+    content: '冬芽の観察と解説。野鳥の観察（15種確認）。冬の森の生態系について学習。観察記録の作成。',
+    nearMiss: '参加者の1名が滑りやすい路面で転倒しそうになった。次回は滑り止めの靴の着用を事前に案内する。',
+    category: '観察活動',
+    thumbnails: [
+      '/images/winter-nature.jpg',
+      '/images/album4.jpg',
+      '/images/forest-survey.jpg',
+      '/images/spring-planting.jpg'
+    ]
+  },
+  {
+    date: '2024-02-25',
+    title: '定例活動',
+    location: '丹沢山地 調査エリア',
+    datetime: '2024年2月25日（日）7:00～17:00',
+    weather: '曇り時々晴れ、気温5℃、湿度50%',
+    participants: '総勢28名（調査員20名、スタッフ8名）',
+    reporter: '伊藤 博文（調査リーダー）',
+    content: '樹木の生長状況調査（3ha）。生物多様性の記録。土壌サンプルの採取。GPSによる位置情報記録。',
+    nearMiss: '調査中に野生動物（イノシシ）と遭遇。適切な距離を保ち、安全に回避できた。次回は野生動物への注意喚起を強化。',
+    category: '調査活動',
+    thumbnails: [
+      '/images/forest-survey.jpg',
+      '/images/forest-maintenance.jpg',
+      '/images/header-bg.jpg',
+      '/images/winter-nature.jpg'
+    ]
+  }
+]
+---
+
+<Layout title="活動記録">
+  <div class="mx-auto max-w-4xl">
+    <h1 class="mb-8 text-3xl font-bold">活動記録</h1>
+
+    <section class="mb-12">
+      <div class="space-y-8">
+        {
+          activities.map((activity) => (
+            <article class="overflow-hidden rounded-lg bg-white shadow-lg">
+              <div class="p-6">
+                <div class="mb-4 flex items-center justify-between">
+                  <h2 class="text-xl font-bold">{activity.location}</h2>
+                  <span class="rounded-full bg-primary-100 px-3 py-1 text-sm font-medium text-primary-800">
+                    {activity.category}
+                  </span>
+                </div>
+                
+                <div class="space-y-3">
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">活動日時：</span>
+                      <span class="text-base text-gray-600">{activity.datetime}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">天候・気温：</span>
+                      <span class="text-base text-gray-600">{activity.weather}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">参加者：</span>
+                      <span class="text-base text-gray-600">{activity.participants}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">報告者：</span>
+                      <span class="text-base text-gray-600">{activity.reporter}</span>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">活動内容：</span>
+                      <div class="mt-1 text-base text-gray-600">
+                        {activity.content}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start">
+                    <div>
+                      <span class="font-medium text-base text-gray-700">ヒヤリハット：</span>
+                      <div class="mt-1 text-base text-gray-600">
+                        {activity.nearMiss}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- サムネール画像セクション -->
+                {activity.thumbnails && activity.thumbnails.length > 0 && (
+                  <div class="mt-6 pt-4 border-t border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-700 mb-3">活動写真</h3>
+                    <div class="flex flex-wrap gap-3">
+                      {activity.thumbnails.map((thumbnail, index) => (
+                        <div class="relative group">
+                          <img
+                            src={thumbnail}
+                            alt={`${activity.title} - 写真${index + 1}`}
+                            class="w-24 h-24 object-cover rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+                            data-src={thumbnail}
+                            data-alt={`${activity.title} - 写真${index + 1}`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- ページネーション -->
+    <div class="flex justify-center mt-12">
+      <nav class="flex items-center space-x-2">
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="px-4 py-2 bg-primary-600 text-white rounded">1</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">2</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">3</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <ImageModal client:load />
+
+  <script>
+    // DOMContentLoadedイベントで初期化
+    document.addEventListener('DOMContentLoaded', function() {
+      // 画像クリックイベントリスナーを追加
+      const images = document.querySelectorAll('img[data-src]');
+      images.forEach(img => {
+        img.addEventListener('click', function(this: HTMLImageElement) {
+          const src = this.getAttribute('data-src');
+          const alt = this.getAttribute('data-alt');
+          if (src && alt) {
+            // Reactコンポーネントのモーダルを開く
+            window.dispatchEvent(new CustomEvent('openImageModal', {
+              detail: { src, alt }
+            }));
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

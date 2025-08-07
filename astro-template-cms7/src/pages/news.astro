@@ -1,0 +1,200 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+// お知らせのサンプルデータ
+const newsItems = [
+  {
+    id: 1,
+    title: '2024年度の活動計画を公開しました',
+    content: '2024年度の森林ボランティア活動計画を公開いたします。今年度は植樹活動、森林整備、環境教育など、より多くの活動を予定しています。詳細は添付のPDFファイルをご確認ください。',
+    date: '2024-03-20',
+    category: '重要',
+    priority: 'high',
+    attachments: ['2024年度活動計画.pdf'],
+    author: '事務局'
+  },
+  {
+    id: 2,
+    title: '森林大学の受講生を募集しています',
+    content: '日本森林ボランティア協会主催の森林大学の受講生を募集いたします。森林の基礎知識から実践的な技術まで、体系的に学べる講座です。定員30名、先着順となります。',
+    date: '2024-03-15',
+    category: '募集',
+    priority: 'medium',
+    attachments: ['森林大学募集要項.pdf', '申込書.docx'],
+    author: '教育担当'
+  },
+  {
+    id: 3,
+    title: 'ボランティア保険の更新について',
+    content: '森林ボランティア活動保険の更新手続きについてお知らせします。2024年度の保険更新は3月末までとなっております。未更新の方は早めに手続きをお願いいたします。',
+    date: '2024-03-10',
+    category: '保険',
+    priority: 'high',
+    attachments: ['保険更新手続き.pdf'],
+    author: '事務局'
+  },
+  {
+    id: 4,
+    title: '春の植樹祭の参加者募集',
+    content: '4月15日に開催予定の春の植樹祭の参加者を募集いたします。クヌギとコナラの苗木を植樹し、森林の再生に取り組みます。初心者の方も大歓迎です。',
+    date: '2024-03-05',
+    category: 'イベント',
+    priority: 'medium',
+    attachments: ['植樹祭案内.pdf'],
+    author: 'イベント担当'
+  },
+  {
+    id: 5,
+    title: '事務局の営業時間変更のお知らせ',
+    content: '4月1日より事務局の営業時間を変更いたします。平日9:00-17:00（土日祝日休み）となります。ご不便をおかけしますが、ご理解いただけますようお願いいたします。',
+    date: '2024-02-28',
+    category: '事務局',
+    priority: 'low',
+    attachments: [],
+    author: '事務局'
+  },
+  {
+    id: 6,
+    title: '新入会員歓迎会の開催',
+    content: '新しく入会された会員の皆様を対象とした歓迎会を開催いたします。森林ボランティア活動の概要説明や、先輩会員との交流の場を設けます。',
+    date: '2024-02-20',
+    category: 'イベント',
+    priority: 'medium',
+    attachments: ['歓迎会案内.pdf'],
+    author: '会員担当'
+  },
+  {
+    id: 7,
+    title: '安全講習会の開催',
+    content: '森林ボランティア活動における安全講習会を開催いたします。チェーンソーの使用方法、安全装備の着用方法など、安全な活動に必要な知識を学べます。',
+    date: '2024-02-15',
+    category: '講習',
+    priority: 'high',
+    attachments: ['安全講習会案内.pdf'],
+    author: '安全担当'
+  },
+  {
+    id: 8,
+    title: '会報誌「森の声」第50号発行',
+    content: '会報誌「森の声」第50号を発行いたしました。特集は「森林ボランティア活動の10年」です。会員の皆様には郵送にてお届けいたします。',
+    date: '2024-02-10',
+    category: '会報',
+    priority: 'low',
+    attachments: ['森の声50号.pdf'],
+    author: '編集部'
+  }
+]
+
+const categories = ['すべて', '重要', '募集', '保険', 'イベント', '事務局', '講習', '会報']
+---
+
+<Layout title="お知らせ">
+  <div class="mx-auto max-w-4xl">
+    <!-- ヘッダーセクション -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold">お知らせ</h1>
+      <p class="text-lg text-gray-600">
+        日本森林ボランティア協会からの重要な情報をお知らせします。
+        活動予定、募集情報、事務局からの連絡事項などを掲載しています。
+      </p>
+    </div>
+
+    <!-- カテゴリーフィルター -->
+    <div class="mb-8">
+      <div class="flex flex-wrap gap-2 justify-center">
+        {categories.map((category) => (
+          <button
+            class="px-4 py-2 rounded-full bg-primary-100 text-primary-800 hover:bg-primary-200 transition-colors"
+            data-category={category}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- お知らせ一覧 -->
+    <div class="space-y-6">
+      {newsItems.map((item) => (
+        <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+          <div class="p-6">
+            <!-- ヘッダー -->
+            <div class="flex items-start justify-between mb-4">
+              <div class="flex items-center space-x-3">
+                <span class={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  item.priority === 'high' 
+                    ? 'bg-red-100 text-red-800' 
+                    : item.priority === 'medium'
+                    ? 'bg-yellow-100 text-yellow-800'
+                    : 'bg-gray-100 text-gray-800'
+                }`}>
+                  {item.category}
+                </span>
+                {item.priority === 'high' && (
+                  <span class="bg-red-500 text-white px-2 py-1 rounded text-xs font-bold">
+                    重要
+                  </span>
+                )}
+              </div>
+              <div class="flex items-center text-base text-gray-500">
+                <i class="fas fa-calendar mr-1"></i>
+                {new Date(item.date).toLocaleDateString('ja-JP')}
+              </div>
+            </div>
+
+            <!-- タイトル -->
+            <h2 class="text-xl font-bold text-gray-800 mb-3">
+              {item.title}
+            </h2>
+
+            <!-- 内容 -->
+            <p class="text-gray-600 mb-4 leading-relaxed">
+              {item.content}
+            </p>
+
+            <!-- 添付ファイル -->
+            {item.attachments.length > 0 && (
+              <div class="mb-4">
+                <h4 class="text-base font-semibold text-gray-700 mb-2">添付ファイル:</h4>
+                <div class="flex flex-wrap gap-2">
+                  {item.attachments.map((file) => (
+                    <a
+                      href="#"
+                      class="inline-flex items-center px-3 py-1 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors text-base"
+                    >
+                      <i class="fas fa-file-alt mr-2"></i>
+                      {file}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <!-- フッター -->
+            <div class="flex items-center pt-4 border-t border-gray-100">
+              <div class="flex items-center text-base text-gray-500">
+                <i class="fas fa-user mr-2"></i>
+                {item.author}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- ページネーション -->
+    <div class="flex justify-center mt-12">
+      <nav class="flex items-center space-x-2">
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="px-4 py-2 bg-primary-600 text-white rounded">1</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">2</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">3</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
+    </div>
+  </div>
+</Layout> 

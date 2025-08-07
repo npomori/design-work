@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = '事務局員紹介'
+---
+
+<Layout title={title}>
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-primary-800 mb-8 text-3xl font-bold">事務局員紹介</h1>
+
+    <div class="mb-12">
+      <h2 class="text-primary-700 mb-4 text-2xl font-bold">事務局長</h2>
+      <div class="rounded-lg bg-white p-6 shadow-md">
+        <div class="flex items-start space-x-6">
+          <div class="h-32 w-32 overflow-hidden rounded-full bg-gray-200">
+            <img src="/images/participant1.jpg" alt="事務局長" class="h-full w-full object-cover" />
+          </div>
+          <div class="flex-1">
+            <h3 class="mb-2 text-xl font-bold">山田 太郎</h3>
+            <p class="mb-4 text-gray-600">
+              森林保全の専門家として20年以上の経験を持つ。国内外の森林保全プロジェクトに多数参加。
+            </p>
+            <p class="text-base text-gray-500">専門分野：森林生態学、環境教育</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-primary-700 mb-4 text-2xl font-bold">事務局員</h2>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <div class="flex items-start space-x-4">
+            <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200">
+              <img
+                src="/images/participant2.jpg"
+                alt="事務局員1"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="mb-2 text-lg font-bold">佐藤 花子</h3>
+              <p class="mb-2 text-gray-600">ボランティアコーディネーター</p>
+              <p class="text-base text-gray-500">専門分野：ボランティアマネジメント</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <div class="flex items-start space-x-4">
+            <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200">
+              <img
+                src="/images/participant3.jpg"
+                alt="事務局員2"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="mb-2 text-lg font-bold">鈴木 一郎</h3>
+              <p class="mb-2 text-gray-600">森林管理担当</p>
+              <p class="text-base text-gray-500">専門分野：森林管理、樹木医</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <div class="flex items-start space-x-4">
+            <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200">
+              <img
+                src="/images/forest-maintenance.jpg"
+                alt="事務局員3"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="mb-2 text-lg font-bold">田中 美咲</h3>
+              <p class="mb-2 text-gray-600">広報担当</p>
+              <p class="text-base text-gray-500">専門分野：広報、SNSマーケティング</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <div class="flex items-start space-x-4">
+            <div class="h-24 w-24 overflow-hidden rounded-full bg-gray-200">
+              <img
+                src="/images/spring-planting.jpg"
+                alt="事務局員4"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="mb-2 text-lg font-bold">中村 健太</h3>
+              <p class="mb-2 text-gray-600">教育プログラム担当</p>
+              <p class="text-base text-gray-500">専門分野：環境教育、自然体験活動</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-12">
+      <h2 class="text-primary-700 mb-4 text-2xl font-bold">事務局へのお問い合わせ</h2>
+      <div class="rounded-lg bg-white p-6 shadow-md">
+        <p class="mb-4">事務局へのお問い合わせは以下の方法でお願いいたします。</p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>電話：03-xxxx-xxxx（平日9:00-17:00）</li>
+          <li>メール：staff@example.com</li>
+          <li>
+            お問い合わせフォーム：<a href="/contact" class="text-primary-600 hover:text-primary-800"
+              >こちら</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</Layout>

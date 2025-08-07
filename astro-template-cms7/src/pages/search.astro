@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+// URLパラメータから検索クエリを取得
+const query = Astro.url.searchParams.get('q') || ''
+
+// 検索結果のサンプルデータ（実際の実装ではデータベースやCMSから取得）
+const searchResults = query
+  ? [
+      {
+        title: '森林ボランティア活動の基本',
+        url: '/about',
+        excerpt: '森林ボランティア活動の基本的な内容と意義について説明します。',
+        category: '森林ボランティアとは'
+      },
+      {
+        title: '活動地紹介',
+        url: '/locations',
+        excerpt: '協会が管理する森林活動地の詳細情報をご覧いただけます。',
+        category: '活動情報'
+      },
+      {
+        title: '活動予定表',
+        url: '/schedule',
+        excerpt: '今後の森林ボランティア活動の予定をご確認いただけます。',
+        category: '活動情報'
+      },
+      {
+        title: '協会の概要',
+        url: '/organization',
+        excerpt: '日本森林ボランティア協会の組織体制と活動理念について。',
+        category: '協会の概要'
+      }
+    ]
+  : []
+---
+
+<Layout title="検索結果">
+  <div class="mx-auto max-w-4xl">
+    <div class="mb-8">
+      <h1 class="mb-4 text-3xl font-bold text-gray-900">検索結果</h1>
+      {
+        query && (
+          <p class="text-gray-600">
+            「<span class="font-semibold">{query}</span>」の検索結果: {searchResults.length}件
+          </p>
+        )
+      }
+    </div>
+
+    {
+      query ? (
+        searchResults.length > 0 ? (
+          <div class="space-y-6">
+            {searchResults.map((result) => (
+              <article class="rounded-lg bg-white p-6 shadow-md transition-shadow hover:shadow-lg">
+                <div class="mb-2">
+                  <span class="bg-primary-100 text-primary-800 inline-block rounded px-2.5 py-0.5 text-xs font-medium">
+                    {result.category}
+                  </span>
+                </div>
+                <h2 class="mb-2 text-xl font-semibold text-gray-900">
+                  <a href={result.url} class="hover:text-primary-600 transition-colors">
+                    {result.title}
+                  </a>
+                </h2>
+                <p class="mb-3 text-gray-600">{result.excerpt}</p>
+                <a
+                  href={result.url}
+                  class="text-primary-600 hover:text-primary-700 inline-flex items-center font-medium"
+                >
+                  詳細を見る
+                  <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div class="py-12 text-center">
+            <div class="mb-4">
+              <i class="fas fa-search text-6xl text-gray-300" />
+            </div>
+            <h2 class="mb-2 text-2xl font-semibold text-gray-900">
+              検索結果が見つかりませんでした
+            </h2>
+            <p class="mb-6 text-gray-600">
+              「{query}」に一致するページが見つかりませんでした。
+              <br />
+              別のキーワードで検索してみてください。
+            </p>
+            <div class="space-y-3">
+              <p class="text-sm text-gray-500">検索のヒント:</p>
+              <ul class="space-y-1 text-sm text-gray-500">
+                <li>• キーワードのスペルを確認してください</li>
+                <li>• より一般的なキーワードを試してください</li>
+                <li>• キーワードを短くしてみてください</li>
+              </ul>
+            </div>
+          </div>
+        )
+      ) : (
+        <div class="py-12 text-center">
+          <div class="mb-4">
+            <i class="fas fa-search text-6xl text-gray-300" />
+          </div>
+          <h2 class="mb-2 text-2xl font-semibold text-gray-900">
+            検索キーワードを入力してください
+          </h2>
+          <p class="text-gray-600">検索したいキーワードを入力して検索を実行してください。</p>
+        </div>
+      )
+    }
+
+    {
+      query && searchResults.length > 0 && (
+        <div class="mt-8 border-t border-gray-200 pt-6">
+          <h3 class="mb-4 text-lg font-semibold text-gray-900">関連ページ</h3>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <a
+              href="/about"
+              class="block rounded-lg bg-gray-50 p-4 transition-colors hover:bg-gray-100"
+            >
+              <h4 class="font-medium text-gray-900">森林ボランティアとは</h4>
+              <p class="text-sm text-gray-600">森林ボランティア活動の基本について</p>
+            </a>
+            <a
+              href="/activities"
+              class="block rounded-lg bg-gray-50 p-4 transition-colors hover:bg-gray-100"
+            >
+              <h4 class="font-medium text-gray-900">活動記録</h4>
+              <p class="text-sm text-gray-600">過去の活動の様子をご覧いただけます</p>
+            </a>
+            <a
+              href="/join"
+              class="block rounded-lg bg-gray-50 p-4 transition-colors hover:bg-gray-100"
+            >
+              <h4 class="font-medium text-gray-900">協会へ入会</h4>
+              <p class="text-sm text-gray-600">日本森林ボランティア協会への入会方法</p>
+            </a>
+            <a
+              href="/contact"
+              class="block rounded-lg bg-gray-50 p-4 transition-colors hover:bg-gray-100"
+            >
+              <h4 class="font-medium text-gray-900">お問い合わせ</h4>
+              <p class="text-sm text-gray-600">ご質問やご相談はこちらから</p>
+            </a>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</Layout>

@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+// ミニブログ記事のサンプルデータ
+const blogPosts = [
+  {
+    id: 1,
+    content: '今日は春の植樹活動でした！参加者30名でクヌギとコナラの苗木を100本植樹しました。みんなで協力して作業したので、予定より早く終了。植えた苗木が大きく育つのが楽しみです🌱 #植樹 #春 #森林ボランティア',
+    date: '2024-03-20',
+    author: '田中 太郎',
+    image: '/images/spring-planting.jpg',
+    likes: 24,
+    comments: 8
+  },
+  {
+    id: 2,
+    content: '森林調査の結果が出ました！昨年植えた苗木の生存率95%達成🎉 平均樹高も15%成長。生物多様性も向上していて、アカゲラやコゲラも増加中。森林が健康に育っている証拠ですね🌳 #調査 #生物多様性 #成果',
+    date: '2024-03-10',
+    author: '佐藤 花子',
+    image: '/images/forest-survey.jpg',
+    likes: 31,
+    comments: 12
+  },
+  {
+    id: 3,
+    content: '冬の森林整備活動。寒い中でしたが、枯れ枝の除去と下草刈りを完了！森林の健康状態が改善されました。作業後は温かいお茶で一息☕️ #整備 #冬 #森林管理',
+    date: '2024-02-15',
+    author: '山田 次郎',
+    image: '/images/winter-nature.jpg',
+    likes: 18,
+    comments: 5
+  },
+  {
+    id: 4,
+    content: '新入会員の皆さん、ようこそ！今日は安全講習を行いました。森林ボランティア活動では安全第一。みんなで楽しく安全に活動しましょう🛡️ #新入会員 #安全講習 #歓迎',
+    date: '2024-02-01',
+    author: '鈴木 美咲',
+    image: '/images/participant1.jpg',
+    likes: 42,
+    comments: 15
+  },
+  {
+    id: 5,
+    content: '紅葉観察会を開催しました！参加者25名で美しい紅葉を楽しみながら森林の生態系について学びました。子どもたちも大喜びでした🍁 #紅葉 #観察会 #生態系',
+    date: '2024-01-20',
+    author: '高橋 一郎',
+    image: '/images/participant2.jpg',
+    likes: 28,
+    comments: 9
+  },
+  {
+    id: 6,
+    content: '今日の活動で見つけた野鳥たち。アカゲラ、コゲラ、シジュウカラが元気に飛び回っていました。森林が健全だと野鳥も増えるんですね🐦 #野鳥 #観察 #森林',
+    date: '2024-01-10',
+    author: '伊藤 恵子',
+    image: '/images/participant3.jpg',
+    likes: 35,
+    comments: 11
+  },
+  {
+    id: 7,
+    content: '下草刈り作業完了！夏の暑い中でしたが、みんなで協力して作業しました。森林の見通しが良くなり、歩きやすくなりました🌿 #下草刈り #夏 #作業完了',
+    date: '2024-01-05',
+    author: '田中 太郎',
+    image: '/images/forest-maintenance.jpg',
+    likes: 22,
+    comments: 7
+  },
+  {
+    id: 8,
+    content: '森林大学の授業で樹木の見分け方を学びました。葉の形、樹皮の特徴、実の形など、いろいろなポイントがありますね📚 #森林大学 #樹木 #学習',
+    date: '2024-01-01',
+    author: '佐藤 花子',
+    image: '/images/album1.jpg',
+    likes: 19,
+    comments: 6
+  }
+]
+---
+
+<Layout title="活動レポート">
+  <div class="max-w-4xl mx-auto">
+    <!-- ヘッダーセクション -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold">活動レポート</h1>
+      <p class="text-lg text-gray-600">
+        森林ボランティア活動の様子をお届けします。日々の活動を気軽にチェック！
+      </p>
+    </div>
+
+    <!-- 投稿ボタン -->
+    <div class="mb-8 text-center">
+      <button class="bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors font-semibold">
+        <i class="fas fa-plus mr-2"></i>新しいレポートを作成
+      </button>
+    </div>
+
+    <!-- 活動レポート一覧 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {blogPosts.map((post) => (
+        <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+          <!-- 画像 -->
+          <div class="relative">
+            <img
+              src={post.image}
+              alt="活動写真"
+              class="w-full h-48 object-cover"
+            />
+            <!-- 日付オーバーレイ -->
+            <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
+              <div class="text-sm font-semibold text-gray-800">
+                {new Date(post.date).toLocaleDateString('ja-JP', { month: 'short', day: 'numeric' })}
+              </div>
+            </div>
+          </div>
+
+          <!-- 投稿内容 -->
+          <div class="p-4">
+            <!-- 投稿ヘッダー -->
+            <div class="flex items-center mb-3">
+              <div class="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold text-sm mr-2">
+                {post.author.charAt(0)}
+              </div>
+              <div class="flex-1">
+                <div class="font-semibold text-gray-800 text-sm">{post.author}</div>
+                <div class="text-xs text-gray-500">
+                  {new Date(post.date).toLocaleDateString('ja-JP')}
+                </div>
+              </div>
+            </div>
+
+            <!-- テキスト内容 -->
+            <p class="text-gray-800 mb-3 leading-relaxed text-sm line-clamp-3">
+              {post.content}
+            </p>
+
+            <!-- アクションボタン -->
+            <div class="flex items-center justify-between pt-3 border-t border-gray-100">
+              <div class="flex items-center space-x-4">
+                <button class="flex items-center text-gray-500 hover:text-red-500 transition-colors text-sm">
+                  <i class="fas fa-heart mr-1"></i>
+                  <span>{post.likes}</span>
+                </button>
+                <button class="flex items-center text-gray-500 hover:text-blue-500 transition-colors text-sm">
+                  <i class="fas fa-comment mr-1"></i>
+                  <span>{post.comments}</span>
+                </button>
+              </div>
+              <a
+                href={`/blog/${post.id}`}
+                class="text-primary-600 hover:text-primary-800 font-semibold text-sm"
+              >
+                詳細を見る
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- ページネーション -->
+    <div class="flex justify-center mt-12">
+      <nav class="flex items-center space-x-2">
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="px-4 py-2 bg-primary-600 text-white rounded">1</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">2</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">3</button>
+        <button class="px-4 py-2 bg-gray-200 text-gray-600 rounded hover:bg-gray-300">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </nav>
+    </div>
+  </div>
+</Layout>
+
+ 
