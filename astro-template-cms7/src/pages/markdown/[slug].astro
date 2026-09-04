@@ -1,0 +1,40 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import MarkdownContent from '../../components/MarkdownContent.astro'
+import { loadMarkdownFile, extractTitleFromFilename } from '../../utils/markdown'
+
+export async function getStaticPaths() {
+  // 利用可能なMarkdownファイルのリストを取得
+  // 実際の実装では、contentディレクトリをスキャンしてファイル一覧を取得
+  return [
+    { params: { slug: 'sample' } }
+    // 他のMarkdownファイルもここに追加
+  ]
+}
+
+const { slug } = Astro.params
+
+// Markdownファイルを読み込み
+const markdownContent = loadMarkdownFile(`${slug}.md`)
+const title = extractTitleFromFilename(`${slug}.md`)
+
+// ファイルが存在しない場合のエラーハンドリング
+if (!markdownContent || markdownContent.includes('コンテンツを読み込めませんでした')) {
+  return Astro.redirect('/404')
+}
+---
+
+<Layout title={title}>
+  <div class="mx-auto max-w-4xl">
+    <MarkdownContent content={markdownContent} title={title} showToc={true} />
+
+    <!-- ページ情報 -->
+    <div class="mt-12 rounded-lg bg-gray-50 p-6">
+      <h3 class="mb-3 text-lg font-semibold text-gray-800">ページ情報</h3>
+      <div class="text-sm text-gray-500">
+        <p>ファイル: <code>src/content/{slug}.md</code></p>
+        <p>最終更新: {new Date().toLocaleDateString('ja-JP')}</p>
+      </div>
+    </div>
+  </div>
+</Layout>

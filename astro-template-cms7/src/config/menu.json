@@ -74,6 +74,11 @@
           "id": "links",
           "label": "リンク集",
           "href": "/links"
+        },
+        {
+          "id": "markdown-sample",
+          "label": "Markdownサンプル",
+          "href": "/markdown-sample"
         }
       ]
     }
@@ -143,6 +148,11 @@
       "id": "links",
       "label": "リンク集",
       "href": "/links"
+    },
+    {
+      "id": "markdown-sample",
+      "label": "Markdownサンプル",
+      "href": "/markdown-sample"
     }
   ]
 }

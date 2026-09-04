@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro'
+import MarkdownContent from '../components/MarkdownContent.astro'
+import { loadMarkdownFile, extractTitleFromFilename } from '../utils/markdown'
+
+// サンプルのMarkdownファイルを読み込み
+const markdownContent = loadMarkdownFile('sample.md')
+const title = extractTitleFromFilename('sample.md')
+---
+
+<Layout title={title}>
+  <div class="mx-auto max-w-4xl">
+    <MarkdownContent content={markdownContent} title={title} showToc={true} />
+
+    <!-- ページ情報 -->
+    <div class="mt-12 rounded-lg bg-gray-50 p-6">
+      <h3 class="mb-3 text-lg font-semibold text-gray-800">このページについて</h3>
+      <p class="mb-4 text-gray-600">
+        このページは汎用的なMarkdownページテンプレートのサンプルです。
+        Markdownファイルからコンテンツを読み込んで表示しています。
+      </p>
+      <div class="text-sm text-gray-500">
+        <p>ファイル: <code>src/content/sample.md</code></p>
+        <p>最終更新: {new Date().toLocaleDateString('ja-JP')}</p>
+      </div>
+    </div>
+  </div>
+</Layout>

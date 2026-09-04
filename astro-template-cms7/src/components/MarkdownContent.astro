@@ -1,0 +1,270 @@
+---
+interface Props {
+  content: string
+  title?: string
+  showToc?: boolean
+}
+
+const { content, title, showToc = false } = Astro.props
+
+// 目次を生成する関数
+function generateToc(markdown: string) {
+  const lines = markdown.split('\n')
+  const headings = lines
+    .filter((line) => line.startsWith('#'))
+    .map((line) => {
+      const level = line.match(/^#+/)?.[0].length || 1
+      const text = line.replace(/^#+\s*/, '')
+      const id = text.toLowerCase().replace(/[^a-z0-9]+/g, '-')
+      return { level, text, id }
+    })
+
+  return headings
+}
+
+const toc = showToc ? generateToc(content) : []
+---
+
+<div class="markdown-content">
+  {
+    title && (
+      <div class="mb-12">
+        <div class="text-center">
+          <div class="mb-4 inline-flex items-center space-x-2">
+            <div class="bg-primary-600 h-1 w-1 rounded-full" />
+            <span class="text-primary-700 text-xs font-medium tracking-widest uppercase">
+              Markdown
+            </span>
+            <div class="bg-primary-600 h-1 w-1 rounded-full" />
+          </div>
+
+          <h1 class="mb-6 text-4xl leading-tight font-bold text-gray-900 md:text-6xl">{title}</h1>
+
+          <div class="flex justify-center">
+            <div class="from-primary-600 via-secondary-500 to-primary-600 h-1 w-16 rounded-full bg-gradient-to-r" />
+          </div>
+
+          <div class="mt-8 flex justify-center">
+            <div class="flex items-center space-x-6 text-sm text-gray-500">
+              <div class="flex items-center space-x-2">
+                <svg class="text-primary-600 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span>最終更新: {new Date().toLocaleDateString('ja-JP')}</span>
+              </div>
+              <div class="h-4 w-px bg-gray-300" />
+              <div class="flex items-center space-x-2">
+                <svg class="text-secondary-600 h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>サンプルページ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    showToc && toc.length > 0 && (
+      <div class="border-primary-600 mb-8 rounded-r-lg border-l-4 bg-gray-50 p-6">
+        <h2 class="mb-4 text-lg font-semibold text-gray-800">目次</h2>
+        <nav class="space-y-2">
+          {toc.map((item) => (
+            <a
+              href={`#${item.id}`}
+              class={`text-primary-600 hover:text-primary-800 block transition-colors ${
+                item.level === 1 ? 'font-semibold' : item.level === 2 ? 'ml-4' : 'ml-8'
+              }`}
+            >
+              {item.text}
+            </a>
+          ))}
+        </nav>
+      </div>
+    )
+  }
+
+  <div class="prose prose-lg markdown-body max-w-none">
+    <div set:html={content} />
+  </div>
+</div>
+
+<style is:global>
+  .markdown-body {
+    line-height: 1.625 !important;
+    color: rgb(31 41 55) !important;
+  }
+
+  .markdown-body h1 {
+    margin-top: 2rem !important;
+    margin-bottom: 1.5rem !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 2px solid #bbf7d0 !important;
+    font-size: 1.875rem !important;
+    font-weight: 700 !important;
+    color: rgb(17 24 39) !important;
+  }
+
+  .markdown-body h2 {
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    border-bottom: 1px solid rgb(229 231 235) !important;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: rgb(31 41 55) !important;
+  }
+
+  .markdown-body h3 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: rgb(31 41 55) !important;
+  }
+
+  .markdown-body h4 {
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 1.125rem !important;
+    font-weight: 600 !important;
+    color: rgb(31 41 55) !important;
+  }
+
+  .markdown-body p {
+    margin-bottom: 1rem !important;
+    color: rgb(55 65 81) !important;
+  }
+
+  .markdown-body ul {
+    margin-bottom: 1rem !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .markdown-body ul li {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .markdown-body ol {
+    margin-bottom: 1rem !important;
+    padding-left: 1.5rem !important;
+  }
+
+  .markdown-body ol li {
+    margin-bottom: 0.25rem !important;
+  }
+
+  .markdown-body li {
+    color: rgb(55 65 81) !important;
+  }
+
+  .markdown-body blockquote {
+    margin: 1.5rem 0 !important;
+    padding: 1rem !important;
+    border-left: 4px solid #16a34a !important;
+    background-color: #f0fdf4 !important;
+    color: rgb(55 65 81) !important;
+    font-style: italic !important;
+  }
+
+  .markdown-body code {
+    padding: 0.25rem 0.5rem !important;
+    background-color: rgb(243 244 246) !important;
+    color: rgb(31 41 55) !important;
+    font-size: 0.875rem !important;
+    font-family:
+      ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace !important;
+    border-radius: 0.25rem !important;
+  }
+
+  .markdown-body pre {
+    margin: 1.5rem 0 !important;
+    padding: 1rem !important;
+    background-color: rgb(17 24 39) !important;
+    color: rgb(243 244 246) !important;
+    border-radius: 0.5rem !important;
+    overflow-x: auto !important;
+  }
+
+  .markdown-body pre code {
+    background-color: transparent !important;
+    color: rgb(243 244 246) !important;
+    padding: 0 !important;
+  }
+
+  .markdown-body table {
+    margin: 1.5rem 0 !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1px solid rgb(209 213 219) !important;
+  }
+
+  .markdown-body th {
+    padding: 0.5rem 1rem !important;
+    background-color: rgb(243 244 246) !important;
+    border: 1px solid rgb(209 213 219) !important;
+    text-align: left !important;
+    font-weight: 600 !important;
+  }
+
+  .markdown-body td {
+    padding: 0.5rem 1rem !important;
+    border: 1px solid rgb(209 213 219) !important;
+  }
+
+  .markdown-body img {
+    margin: 1.5rem 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 0.5rem !important;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+  }
+
+  .markdown-body a {
+    color: #16a34a !important;
+    text-decoration: underline !important;
+    transition: color 0.15s ease-in-out !important;
+  }
+
+  .markdown-body a:hover {
+    color: #15803d !important;
+  }
+
+  .markdown-body hr {
+    margin: 2rem 0 !important;
+    border: 1px solid rgb(209 213 219) !important;
+  }
+
+  .markdown-body strong {
+    font-weight: 600 !important;
+  }
+
+  .markdown-body em {
+    font-style: italic !important;
+  }
+
+  /* レスポンシブ対応 */
+  @media (max-width: 768px) {
+    .markdown-body h1 {
+      font-size: 1.5rem !important;
+    }
+
+    .markdown-body h2 {
+      font-size: 1.25rem !important;
+    }
+
+    .markdown-body h3 {
+      font-size: 1.125rem !important;
+    }
+
+    .markdown-body pre {
+      font-size: 0.875rem !important;
+    }
+  }
+</style>
