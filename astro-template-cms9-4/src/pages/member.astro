@@ -1,0 +1,76 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = '会員専用'
+---
+
+<Layout title={title}>
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-primary-800 mb-8 text-3xl font-bold">会員専用ページ</h1>
+    <div class="mb-12">
+      <div class="rounded-lg bg-white p-6 shadow-md">
+        <div class="mb-8">
+          <h2 class="text-primary-700 mb-4 text-2xl font-bold">ログイン</h2>
+          <form class="space-y-4">
+            <div>
+              <label for="email" class="mb-1 block text-gray-700">メールアドレス</label>
+              <input
+                type="email"
+                id="email"
+                class="w-full rounded-md border border-gray-300 p-2"
+                required
+              />
+            </div>
+            <div>
+              <label for="password" class="mb-1 block text-gray-700">パスワード</label>
+              <input
+                type="password"
+                id="password"
+                class="w-full rounded-md border border-gray-300 p-2"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              class="bg-primary-600 hover:bg-primary-700 w-full rounded-md px-4 py-2 text-white"
+            >
+              ログイン
+            </button>
+          </form>
+        </div>
+
+        <div class="mb-8">
+          <h2 class="text-primary-700 mb-4 text-2xl font-bold">会員特典</h2>
+          <ul class="list-disc space-y-2 pl-6 text-gray-600">
+            <li>会員限定のイベントへの優先参加</li>
+            <li>活動地への無料アクセス</li>
+            <li>会員限定のニュースレター配信</li>
+            <li>森林ボランティア保険の割引</li>
+            <li>森林大学の受講料割引</li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-primary-700 mb-4 text-2xl font-bold">入会手続き</h2>
+          <p class="mb-4 text-gray-600">
+            日本森林ボランティア協会への入会をご希望の方は、以下の手続きをお願いいたします。
+          </p>
+          <ol class="list-decimal space-y-2 pl-6 text-gray-600">
+            <li>入会申込書のダウンロード</li>
+            <li>必要事項の記入</li>
+            <li>入会金・年会費の振込</li>
+            <li>申込書の提出</li>
+          </ol>
+          <div class="mt-4">
+            <a
+              href="/join"
+              class="bg-primary-600 hover:bg-primary-700 inline-block rounded-md px-4 py-2 text-white"
+            >
+              入会手続きへ
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

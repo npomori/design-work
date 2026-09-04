@@ -1,0 +1,61 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import ArticlesEditorList from '../../components/article/ArticlesEditorList'
+
+type Article = {
+  id: string
+  slug: string
+  title?: string
+  description?: string
+  date?: string
+  author?: string
+  tags?: string[]
+  draft?: boolean
+}
+
+let articles: Article[] = []
+let error = ''
+
+try {
+  const res = await fetch(`${Astro.url.origin}/api/articles?all=1`)
+  const data = await res.json()
+  if (data.success) {
+    articles = data.data
+  } else {
+    error = data.error || '一覧取得に失敗しました'
+  }
+} catch {
+  error = 'サーバーエラーが発生しました'
+}
+
+// 日付でソート（新しい順）
+articles.sort((a, b) => {
+  if (!a.date || !b.date) return 0
+  return new Date(b.date).getTime() - new Date(a.date).getTime()
+})
+---
+
+<Layout title="記事エディタ">
+  <section class="container mx-auto px-4 py-8">
+    <h1 class="mb-4 text-2xl font-bold">記事エディタ</h1>
+    <p class="mb-6 text-base text-gray-600">記事を選択して編集画面へ移動します。</p>
+
+    {
+      error && (
+        <div class="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+          {error}
+        </div>
+      )
+    }
+
+    {
+      articles.length === 0 && !error ? (
+        <div class="rounded border border-gray-200 bg-gray-50 px-4 py-3 text-gray-700">
+          記事がありません。
+        </div>
+      ) : (
+        <ArticlesEditorList client:load articles={articles} />
+      )
+    }
+  </section>
+</Layout>

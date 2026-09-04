@@ -1,0 +1,281 @@
+[
+  {
+    "id": "minoh",
+    "name": "箕面国有林",
+    "position": [34.8167, 135.4667],
+    "type": "regular",
+    "activities": "大阪の都市部に近い国有林で、間伐や下草刈りなどの森林整備、植樹、自然観察会を定期的に実施しています。",
+    "image": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府箕面市",
+    "hasDetail": true,
+    "detailInfo": {
+      "activityDetails": "森林整備活動では、間伐や下草刈りを通じて健全な森林環境を維持します。\n植樹活動では、地域の気候に適した苗木を植え、未来の森を育てます。\n自然観察会では、専門家の解説を聞きながら、豊かな動植物を観察します。",
+      "fieldCharacteristics": "箕面国有林は大阪の都市部に近い位置にありながら、豊かな自然が残されています。\n標高100～600mの山地で、四季折々の景観が楽しめます。\nシイ、カシなどの常緑広葉樹林が広がり、多様な動植物が生息しています。",
+      "meetingPoint": {
+        "address": "箕面駅前集合(阪急箕面線箕面駅)",
+        "time": "毎月第2・4土曜日 9:00集合",
+        "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.8!2d135.4667!3d34.8167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDQ5JzAwLjEiTiAxMzXCsDI4JzAwLjEiRQ!5e0!3m2!1sja!2sjp!4v1234567890",
+        "additionalInfo": "駅改札を出て左手のロータリーにお集まりください。\n雨天時は駅構内で待機します。"
+      },
+      "access": "阪急箕面線箕面駅から徒歩約20分、または箕面バス停から徒歩約15分",
+      "facilities": "駐車場、トイレ、休憩所、案内板",
+      "schedule": "毎月第2・4土曜日 9:00-15:00",
+      "requirements": "動きやすい服装、長靴、軍手、帽子、水筒、昼食",
+      "participationFee": "無料",
+      "contact": "箕面市役所 環境部 06-1234-5678",
+      "upcomingDates": [
+        "2025年12月14日(土)",
+        "2025年12月28日(土)",
+        "2026年1月11日(土)",
+        "2026年1月25日(土)",
+        "2026年2月8日(土)",
+        "2026年2月22日(土)",
+        "2026年3月14日(土)",
+        "2026年3月28日(土)",
+        "2026年4月11日(土)",
+        "2026年4月25日(土)",
+        "2026年5月9日(土)",
+        "2026年5月23日(土)"
+      ],
+      "notes": "・雨天中止の場合は前日17時までに連絡します\n・小学生以下は保護者同伴でお願いします",
+      "other": "駐車場は先着20台まで利用可能です。満車の場合は近隣の有料駐車場をご利用ください。",
+      "gallery": [
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=400&auto=format&fit=crop&q=60"
+      ]
+    }
+  },
+  {
+    "id": "kongosan",
+    "name": "金剛山",
+    "position": [34.4167, 135.6833],
+    "type": "regular",
+    "activities": "標高1,125mの信仰の山で、登山道の整備や外来種の駆除、植生のモニタリングなど、山の環境保全活動を行っています。",
+    "image": "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府南河内郡千早赤阪村・奈良県御所市",
+    "hasDetail": true,
+    "detailInfo": {
+      "activityDetails": "登山道整備では、階段や手すりの修繕、落石除去などを行います。\n森林保全活動では、外来種の駆除や植生の回復作業を実施します。\n環境調査では、登山者数の調査や植生の変化をモニタリングします。",
+      "fieldCharacteristics": "標高1,125mの山で、大阪府と奈良県の県境に位置しています。\n古くから信仰の山として知られ、山頂には葛木神社があります。\nブナ、ミズナラなどの落葉広葉樹林が広がり、四季の変化が美しい山です。",
+      "meetingPoint": {
+        "address": "金剛山ロープウェイ千早駅前集合",
+        "time": "毎月第1・3日曜日 8:00集合",
+        "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.8!2d135.6833!3d34.4167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDI1JzAwLjEiTiAxMzXCsDQxJzAwLjEiRQ!5e0!3m2!1sja!2sjp!4v1234567890",
+        "additionalInfo": "ロープウェイ駅前の広場にお集まりください。\n登山装備を確認してからスタートします。"
+      },
+      "access": "近鉄長野線富田林駅からバス約30分、または車で金剛山ロープウェイ駐車場まで",
+      "facilities": "ロープウェイ、駐車場、トイレ、売店、山小屋",
+      "schedule": "毎月第1・3日曜日 8:00-16:00",
+      "requirements": "登山靴、リュックサック、雨具、防寒具、水筒、昼食・行動食",
+      "participationFee": "無料（ロープウェイ利用の場合は各自負担）",
+      "contact": "千早赤阪村役場 産業振興課 0721-72-0081",
+      "notes": "・荒天時は中止となります（前日18時に判断）\n・標高が高いため、季節に応じた防寒対策をお願いします\n・登山に適した装備でご参加ください",
+      "other": "ロープウェイ利用の場合、往復料金は各自負担となります（大人1,500円、小人750円）。",
+      "gallery": [
+        "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&auto=format&fit=crop&q=60"
+      ]
+    }
+  },
+  {
+    "id": "kudoyama",
+    "name": "九度山",
+    "position": [34.2833, 135.5667],
+    "type": "regular",
+    "activities": "真田ゆかりの地で、スギ・ヒノキ人工林の間伐、下草刈り、作業道の補修など、森林の健全な成長を促す活動を実施しています。",
+    "image": "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&auto=format&fit=crop&q=60",
+    "address": "和歌山県伊都郡九度山町",
+    "hasDetail": true,
+    "detailInfo": {
+      "activityDetails": "間伐作業では、密集した樹木を適切に伐採し、森林の健全な成長を促します。\n下草刈りでは、林床の植生管理を行い、樹木の生育環境を整えます。\n林道整備では、作業道の補修や排水溝の清掃を実施します。",
+      "fieldCharacteristics": "真田昌幸・信繁父子が配流された地として知られる歴史ある地域です。\n標高200～400mの丘陵地で、スギ、ヒノキの人工林が中心です。\n紀ノ川の清流に面し、温暖な気候で作業がしやすい環境です。",
+      "meetingPoint": {
+        "address": "九度山町役場駐車場集合",
+        "time": "毎月第2土曜日 9:00集合",
+        "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.8!2d135.5667!3d34.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDE3JzAwLjEiTiAxMzXCsDM0JzAwLjEiRQ!5e0!3m2!1sja!2sjp!4v1234567890",
+        "additionalInfo": "町役場の北側駐車場が集合場所です。\n受付で参加者名簿への記入をお願いします。"
+      },
+      "access": "南海高野線九度山駅から徒歩約10分、または車で九度山町役場まで",
+      "facilities": "駐車場、トイレ、休憩所、真田庵（史跡）",
+      "schedule": "毎月第2土曜日 9:00-15:00",
+      "requirements": "作業服、長靴、軍手、帽子、水筒、昼食",
+      "participationFee": "無料",
+      "contact": "九度山町役場 産業建設課 0736-54-2014",
+      "notes": "・雨天中止（前日17時に判断・連絡）\n・チェーンソーなどの機械は団体で用意します\n・初めての方でも安全指導を行いますのでご安心ください",
+      "other": "活動後、希望者は真田庵などの史跡見学も可能です（自由参加）。",
+      "gallery": [
+        "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=400&auto=format&fit=crop&q=60"
+      ]
+    }
+  },
+  {
+    "id": "nose",
+    "name": "能勢の森",
+    "position": [34.9667, 135.4167],
+    "type": "regular",
+    "activities": "大阪北部の里山で、植樹や除伐などの森づくり、春秋の植樹祭、野鳥観察など親子で楽しめる自然体験活動を展開しています。",
+    "image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府豊能郡能勢町",
+    "hasDetail": true,
+    "detailInfo": {
+      "activityDetails": "森づくり活動では、植樹、除伐、つる切りなど多様な森林作業を体験できます。\n植樹祭では、春と秋に地域の方々と一緒に苗木を植えます。\n自然体験プログラムでは、野鳥観察や昆虫採集など親子で楽しめる内容を実施します。",
+      "fieldCharacteristics": "大阪府の北部に位置する里山で、豊かな自然環境が残されています。\nコナラ、クヌギなどの雑木林が広がり、里山の景観が美しい地域です。\n標高300～500mで、四季折々の自然を楽しむことができます。",
+      "meetingPoint": {
+        "address": "能勢の森ふれあいセンター駐車場集合",
+        "time": "毎月第3土曜日 9:00集合(季節により変動)",
+        "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.8!2d135.4167!3d34.9667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDU4JzAwLjEiTiAxMzXCsDI1JzAwLjEiRQ!5e0!3m2!1sja!2sjp!4v1234567890",
+        "additionalInfo": "センター正面玄関前にお集まりください。\n親子での参加を歓迎します。"
+      },
+      "access": "能勢電鉄妙見線妙見口駅からバス約15分、または車で能勢町役場まで",
+      "facilities": "駐車場、トイレ、休憩所、キャンプ場、バーベキュー場",
+      "schedule": "毎月第3土曜日 9:00-15:00（季節により変動）",
+      "requirements": "動きやすい服装、長靴、軍手、帽子、水筒、昼食",
+      "participationFee": "無料",
+      "contact": "能勢町役場 産業振興課 072-734-0001",
+      "notes": "・雨天中止（前日17時に判断）\n・小学生以下は保護者同伴でお願いします\n・ファミリー参加大歓迎です",
+      "other": "活動後、希望者はバーベキュー場で交流会を開催することがあります（実費負担）。",
+      "gallery": [
+        "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=400&auto=format&fit=crop&q=60"
+      ]
+    }
+  },
+  {
+    "id": "takatsuki-bijoyama",
+    "name": "高槻美女山",
+    "position": [34.85, 135.6167],
+    "type": "regular",
+    "activities": "高槻市の美女山で、森林整備作業や自然観察、地域の方々と連携した環境教育プログラムを実施しています。",
+    "image": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府高槻市",
+    "hasDetail": false
+  },
+  {
+    "id": "yoshikawa",
+    "name": "吉川の里",
+    "position": [34.75, 134.9833],
+    "type": "regular",
+    "activities": "兵庫県三木市の里山で、雑木林の保全、農地や水路の整備、地域住民との協働活動を通じて里山文化の継承に取り組んでいます。",
+    "image": "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=600&auto=format&fit=crop&q=60",
+    "address": "兵庫県三木市吉川町",
+    "hasDetail": false
+  },
+  {
+    "id": "sasayama-maruyama",
+    "name": "篠山丸山",
+    "position": [35.0667, 135.2167],
+    "type": "regular",
+    "activities": "丹波篠山市の丸山で、森林の手入れ、地域に適した樹木の植樹、四季折々の自然観察を通じて、豊かな森を育む活動を行っています。",
+    "image": "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&auto=format&fit=crop&q=60",
+    "address": "兵庫県丹波篠山市",
+    "hasDetail": false
+  },
+  {
+    "id": "katsuragi-mitoshi",
+    "name": "葛城御歳神社",
+    "position": [34.4667, 135.7333],
+    "type": "regular",
+    "activities": "葛城御歳神社の周辺環境を整備し、歴史的な文化財を保護しながら、地域に根ざした伝統文化の継承活動を実施しています。",
+    "image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&auto=format&fit=crop&q=60",
+    "address": "奈良県御所市",
+    "hasDetail": false
+  },
+  {
+    "id": "muraya",
+    "name": "村屋神社",
+    "position": [34.55, 135.7833],
+    "type": "regular",
+    "activities": "村屋神社の境内を整備し、歴史的景観を保全しながら、地域住民との交流イベントや文化活動を通じて地域の絆を深めています。",
+    "image": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&auto=format&fit=crop&q=60",
+    "address": "奈良県磯城郡田原本町",
+    "hasDetail": false
+  },
+  {
+    "id": "minamiyamashiro",
+    "name": "南山城",
+    "position": [34.7833, 135.85],
+    "type": "regular",
+    "activities": "京都府南山城村の豊かな森林で、間伐や植林などの森林整備、野生動植物の保護、地域との協働による環境保全活動を展開しています。",
+    "image": "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=600&auto=format&fit=crop&q=60",
+    "address": "京都府相楽郡南山城村",
+    "hasDetail": false
+  },
+  {
+    "id": "izumi",
+    "name": "いずみの森",
+    "position": [34.4, 135.35],
+    "type": "regular",
+    "activities": "泉南の森で、植樹や育林などの森づくり、子どもたちの自然体験活動、学校や地域と連携した環境教育プログラムを実施しています。",
+    "image": "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府泉南郡熊取町",
+    "hasDetail": false
+  },
+  {
+    "id": "kagu-kobo",
+    "name": "家具工房の森",
+    "position": [34.6833, 135.5],
+    "type": "regular",
+    "activities": "家具工房と連携し、木材の適切な活用、循環型の森づくり、林業と製造業をつなぐ産業連携プロジェクトを推進しています。",
+    "image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府",
+    "hasDetail": false
+  },
+  {
+    "id": "ntt-horigono",
+    "name": "ＮＴＴドコモほりごの森活動支援",
+    "position": [34.85, 135.45],
+    "type": "activity",
+    "activities": "NTTドコモのCSR活動として、社員とその家族、地域住民と共に植樹や間伐を行い、小学校と連携した環境教育も展開しています。",
+    "image": "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府",
+    "hasDetail": true,
+    "detailInfo": {
+      "activityDetails": "企業との協働活動では、NTTドコモ社員とその家族と一緒に森づくりを行います。\n森づくり支援では、植樹、間伐、歩道整備など多様な活動を実施します。\n社会貢献活動として、地域の小学校と連携した環境教育プログラムも展開しています。",
+      "fieldCharacteristics": "企業のCSR活動として2010年から続く森づくりプロジェクトのフィールドです。\n約5ヘクタールの広大な森林で、スギ、ヒノキの人工林と広葉樹の混交林があります。\n体験施設が充実しており、初心者でも安心して参加できる環境が整っています。",
+      "meetingPoint": {
+        "address": "ほりごの森案内センター駐車場集合",
+        "time": "毎月第4土曜日 9:00集合(企業イベント時は変更あり)",
+        "mapUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3273.8!2d135.45!3d34.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDUxJzAwLjEiTiAxMzXCsDI3JzAwLjEiRQ!5e0!3m2!1sja!2sjp!4v1234567890",
+        "additionalInfo": "案内センター前の駐車場が集合場所です。\n事前申込制のため、参加確認をさせていただきます。"
+      },
+      "access": "近鉄南大阪線河内長野駅からバス約20分、または車でほりごの森駐車場まで",
+      "facilities": "駐車場、トイレ、休憩所、案内センター、体験施設",
+      "schedule": "毎月第4土曜日 9:00-15:00（企業イベント時は変更あり）",
+      "requirements": "動きやすい服装、長靴、軍手、帽子、水筒、昼食",
+      "participationFee": "無料",
+      "contact": "ＮＴＴドコモ関西支社 CSR推進部 06-1234-5678",
+      "notes": "・雨天中止（前日17時に判断）\n・企業イベント開催時は一般参加を制限する場合があります\n・事前申込制（定員30名）",
+      "other": "駐車場完備（50台）。NTTドコモ社員以外の一般の方も参加可能です。",
+      "gallery": [
+        "https://images.unsplash.com/photo-1448375240586-882707db888b?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=400&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&auto=format&fit=crop&q=60"
+      ]
+    }
+  },
+  {
+    "id": "zurich",
+    "name": "チューリッヒ生命植樹指導",
+    "position": [34.75, 135.55],
+    "type": "activity",
+    "activities": "チューリッヒ生命と連携し、社員向けの植樹指導、環境保全に関する研修、企業の社会貢献活動をサポートしています。",
+    "image": "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=600&auto=format&fit=crop&q=60",
+    "address": "大阪府",
+    "hasDetail": false
+  },
+  {
+    "id": "mikusayama",
+    "name": "三草山の防鹿柵設置",
+    "position": [34.95, 135.25],
+    "type": "activity",
+    "activities": "三草山で、シカの食害から若木や下草を守る防鹿柵を設置し、野生動物と共生できる森林環境の保護活動を行っています。",
+    "image": "https://images.unsplash.com/photo-1475483768296-6163e08872a1?w=600&auto=format&fit=crop&q=60",
+    "address": "兵庫県三草山",
+    "hasDetail": false
+  }
+]

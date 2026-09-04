@@ -1,0 +1,69 @@
+---
+interface Props {
+  variant?: 'desktop' | 'mobile'
+}
+
+const { variant = 'desktop' } = Astro.props
+
+const userMenuItems = [
+  {
+    id: 'login',
+    label: 'ログイン',
+    href: '/login',
+    icon: 'fas fa-sign-in-alt'
+  },
+  {
+    id: 'register',
+    label: '新規登録',
+    href: '/register',
+    icon: 'fas fa-user-plus'
+  },
+  {
+    id: 'profile',
+    label: 'プロフィール',
+    href: '/profile',
+    icon: 'fas fa-user-circle'
+  }
+]
+---
+
+{
+  variant === 'desktop' ? (
+    <li class="group relative">
+      <button class="hover:text-primary-200 flex items-center text-white">
+        <i class="fas fa-user text-xl" />
+        <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          />
+        </svg>
+      </button>
+      <ul class="bg-primary-800 absolute right-0 hidden min-w-[200px] py-2 group-hover:block">
+        {userMenuItems.map((item) => (
+          <li>
+            <a href={item.href} class="hover:bg-primary-700 block px-4 py-2 text-white">
+              <i class={item.icon + ' mr-2'} />
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </li>
+  ) : (
+    <li class="border-primary-700 border-t pt-4">
+      <ul class="space-y-2">
+        {userMenuItems.map((item) => (
+          <li>
+            <a href={item.href} class="hover:text-primary-200 flex items-center text-white">
+              <i class={item.icon + ' mr-3 w-5'} />
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </li>
+  )
+}

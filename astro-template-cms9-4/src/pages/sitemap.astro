@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = 'サイトマップ'
+---
+
+<Layout title={title}>
+  <div class="mx-auto max-w-4xl">
+    <h1 class="text-primary-800 mb-8 text-3xl font-bold">サイトマップ</h1>
+
+    <div class="mb-12">
+      <div class="rounded-lg bg-white p-6 shadow-md">
+        <div class="space-y-8">
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">協会について</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/about" class="hover:text-primary-600 text-gray-600"
+                  >森林ボランティアとは</a
+                >
+              </li>
+              <li>
+                <a href="/organization" class="hover:text-primary-600 text-gray-600">協会の概要</a>
+              </li>
+              <li>
+                <a href="/staff" class="hover:text-primary-600 text-gray-600">事務局員紹介</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">活動情報</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/locations" class="hover:text-primary-600 text-gray-600">活動地紹介</a>
+              </li>
+              <li>
+                <a href="/schedule" class="hover:text-primary-600 text-gray-600">活動予定表</a>
+              </li>
+              <li>
+                <a href="/activities" class="hover:text-primary-600 text-gray-600">活動記録</a>
+              </li>
+              <li>
+                <a href="/blog" class="hover:text-primary-600 text-gray-600">活動レポート</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">教育・講習</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/university" class="hover:text-primary-600 text-gray-600">森林大学</a>
+              </li>
+              <li>
+                <a href="/lectures" class="hover:text-primary-600 text-gray-600">各種講習会</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">会員・ボランティア</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/join" class="hover:text-primary-600 text-gray-600">協会へ入会</a>
+              </li>
+              <li>
+                <a href="/member" class="hover:text-primary-600 text-gray-600">会員専用</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">お知らせ・情報</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/news" class="hover:text-primary-600 text-gray-600">お知らせ</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="text-primary-700 mb-4 text-2xl font-bold">その他</h2>
+            <ul class="space-y-2">
+              <li>
+                <a href="/access" class="hover:text-primary-600 text-gray-600">アクセス</a>
+              </li>
+              <li>
+                <a href="/links" class="hover:text-primary-600 text-gray-600">リンク集</a>
+              </li>
+              <li>
+                <a href="/contact" class="hover:text-primary-600 text-gray-600">お問い合わせ</a>
+              </li>
+              <li>
+                <a href="/privacy" class="hover:text-primary-600 text-gray-600"
+                  >プライバシーポリシー</a
+                >
+              </li>
+              <li>
+                <a href="/terms" class="hover:text-primary-600 text-gray-600">利用規約</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

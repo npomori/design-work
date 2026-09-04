@@ -1,0 +1,283 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { findLocationById } from '../../data/locations'
+
+// URLパラメータから活動地IDを取得
+const { id } = Astro.params
+
+// 活動地データを取得
+const location = findLocationById(id || '')
+
+// 活動地が見つからない場合は404ページにリダイレクト
+if (!location) {
+  return Astro.redirect('/404')
+}
+---
+
+<Layout title={`${location.name} - 活動地詳細`}>
+  <div class="mx-auto max-w-4xl">
+    <!-- パンくずリスト -->
+    <nav class="mb-6 text-base text-gray-600">
+      <a href="/locations" class="hover:text-primary-600">活動地紹介</a>
+      <span class="mx-2">/</span>
+      <span>{location.name}</span>
+    </nav>
+
+    <!-- 活動地詳細 -->
+    <div class="mb-8">
+      <h1 class="mb-6 text-3xl font-bold">{location.name}</h1>
+
+      <!-- メイン画像 -->
+      <div class="mb-8">
+        <img
+          src={location.image ||
+            'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&auto=format&fit=crop&q=60'}
+          alt={location.name}
+          class="h-96 w-full rounded-lg object-cover shadow-lg"
+        />
+      </div>
+
+      <!-- 活動内容とフィールドの特徴 -->
+      {
+        (location.detailInfo?.activityDetails || location.detailInfo?.fieldCharacteristics) && (
+          <section class="mb-12">
+            <h2 class="mb-4 text-2xl font-bold">活動情報</h2>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              {location.detailInfo?.activityDetails && (
+                <div class="mb-6">
+                  <h3 class="mb-3 text-xl font-bold">活動内容</h3>
+                  <p class="leading-relaxed whitespace-pre-line text-gray-700">
+                    {location.detailInfo.activityDetails}
+                  </p>
+                </div>
+              )}
+              {location.detailInfo?.fieldCharacteristics && (
+                <div>
+                  <h3 class="mb-3 text-xl font-bold">フィールドの特徴</h3>
+                  <p class="leading-relaxed whitespace-pre-line text-gray-700">
+                    {location.detailInfo.fieldCharacteristics}
+                  </p>
+                </div>
+              )}
+            </div>
+          </section>
+        )
+      }
+
+      <!-- 集合場所・時間 -->
+      {
+        location.detailInfo && location.detailInfo.meetingPoint && (
+          <section class="mb-12">
+            <h2 class="mb-4 text-2xl font-bold">集合場所・時間</h2>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="mb-4 space-y-3 text-gray-700">
+                <div>
+                  <span class="font-semibold">集合場所：</span>
+                  <span>{location.detailInfo.meetingPoint.address}</span>
+                </div>
+                <div>
+                  <span class="font-semibold">集合時間：</span>
+                  <span>{location.detailInfo.meetingPoint.time}</span>
+                </div>
+              </div>
+              {location.detailInfo.meetingPoint.additionalInfo && (
+                <div class="mt-3 rounded bg-blue-50 p-3">
+                  <p class="text-base whitespace-pre-line text-gray-700">
+                    {location.detailInfo.meetingPoint.additionalInfo}
+                  </p>
+                </div>
+              )}
+              {location.detailInfo.meetingPoint.mapUrl && (
+                <div class="mt-4">
+                  <iframe
+                    src={location.detailInfo.meetingPoint.mapUrl}
+                    width="100%"
+                    height="300"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="rounded-lg"
+                  />
+                </div>
+              )}
+            </div>
+          </section>
+        )
+      }
+
+      <!-- 詳細情報 -->
+      {
+        location.detailInfo && (
+          <section class="mb-12">
+            <h2 class="mb-4 text-2xl font-bold">活動地情報</h2>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">住所</h3>
+                    <p class="text-gray-700">{location.address || '情報なし'}</p>
+                  </div>
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">アクセス</h3>
+                    <p class="text-gray-700">{location.detailInfo.access}</p>
+                  </div>
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">施設</h3>
+                    <p class="text-gray-700">{location.detailInfo.facilities}</p>
+                  </div>
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">活動日</h3>
+                    <p class="text-gray-700">{location.detailInfo.schedule}</p>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">必要な持ち物</h3>
+                    <p class="text-gray-700">{location.detailInfo.requirements}</p>
+                  </div>
+                  {location.detailInfo.participationFee && (
+                    <div>
+                      <h3 class="mb-2 text-lg font-semibold">参加費</h3>
+                      <p class="text-gray-700">{location.detailInfo.participationFee}</p>
+                    </div>
+                  )}
+                  <div>
+                    <h3 class="mb-2 text-lg font-semibold">お問い合わせ</h3>
+                    <p class="text-gray-700">{location.detailInfo.contact}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )
+      }
+
+      <!-- 活動予定日 -->
+      {
+        location.detailInfo &&
+          location.detailInfo.upcomingDates &&
+          location.detailInfo.upcomingDates.length > 0 && (
+            <section class="mb-12">
+              <h2 class="mb-4 text-2xl font-bold">活動予定日</h2>
+              <details class="group rounded-lg bg-white shadow-lg">
+                <summary class="flex cursor-pointer items-center justify-between p-6 font-semibold text-gray-700 hover:bg-gray-50">
+                  <span class="flex items-center">
+                    <svg
+                      class="text-primary-600 mr-2 h-5 w-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    本年度の活動予定
+                  </span>
+                  <svg
+                    class="h-5 w-5 text-gray-400 transition-transform group-open:rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </summary>
+                <div class="border-t border-gray-200 px-6 pt-4 pb-6">
+                  <ul class="space-y-2">
+                    {location.detailInfo.upcomingDates.map((date) => (
+                      <li class="flex items-center rounded-lg bg-gray-50 px-4 py-3 text-gray-700">
+                        <svg
+                          class="text-primary-600 mr-3 h-4 w-4 flex-shrink-0"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <circle cx="10" cy="10" r="3" />
+                        </svg>
+                        <span>{date}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </details>
+            </section>
+          )
+      }
+
+      <!-- 注意事項 -->
+      {
+        location.detailInfo && location.detailInfo.notes && (
+          <section class="mb-12">
+            <h2 class="mb-4 text-2xl font-bold">注意事項</h2>
+            <div class="rounded-lg border-l-4 border-yellow-400 bg-yellow-50 p-6">
+              <p class="leading-relaxed whitespace-pre-line text-gray-700">
+                {location.detailInfo.notes}
+              </p>
+            </div>
+          </section>
+        )
+      }
+
+      <!-- その他 -->
+      {
+        location.detailInfo && location.detailInfo.other && (
+          <section class="mb-12">
+            <h2 class="mb-4 text-2xl font-bold">その他</h2>
+            <div class="rounded-lg bg-white p-6 shadow-lg">
+              <p class="leading-relaxed whitespace-pre-line text-gray-700">
+                {location.detailInfo.other}
+              </p>
+            </div>
+          </section>
+        )
+      }
+
+      <!-- ギャラリー -->
+      {
+        location.detailInfo &&
+          location.detailInfo.gallery &&
+          location.detailInfo.gallery.length > 0 && (
+            <section class="mb-12">
+              <h2 class="mb-4 text-2xl font-bold">活動写真</h2>
+              <div class="rounded-lg bg-white p-6 shadow-lg">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  {location.detailInfo.gallery.map((image, index) => (
+                    <div class="overflow-hidden rounded-lg">
+                      <img
+                        src={image}
+                        alt={`${location.name}の活動写真 ${index + 1}`}
+                        class="h-48 w-full object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+      }
+    </div>
+
+    <!-- 戻るボタン -->
+    <div class="text-center">
+      <a
+        href="/locations"
+        class="inline-flex items-center rounded-lg border border-gray-300 bg-white px-6 py-3 text-gray-700 transition-colors hover:bg-gray-50"
+      >
+        <svg class="mr-2 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"
+          ></path>
+        </svg>
+        活動地一覧に戻る
+      </a>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,168 @@
+---
+// このページはAPIエンドポイントのテスト用です
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>API テスト - MDXコンテンツ</title>
+  </head>
+  <body>
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="mb-8 text-3xl font-bold">MDXコンテンツ API テスト</h1>
+
+      <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <!-- 記事一覧テスト -->
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <h2 class="mb-4 text-xl font-semibold">記事一覧 API テスト</h2>
+          <button
+            id="fetchArticles"
+            class="mb-4 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          >
+            記事一覧を取得
+          </button>
+          <div id="articlesResult" class="rounded bg-gray-100 p-4 text-base"></div>
+        </div>
+
+        <!-- 個別記事テスト -->
+        <div class="rounded-lg bg-white p-6 shadow-md">
+          <h2 class="mb-4 text-xl font-semibold">個別記事 API テスト</h2>
+          <div class="mb-4">
+            <label for="articleSlug" class="mb-2 block text-base font-medium">記事スラッグ:</label>
+            <input
+              type="text"
+              id="articleSlug"
+              value="forest-activities"
+              class="w-full rounded-md border border-gray-300 px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            />
+          </div>
+          <button
+            id="fetchArticle"
+            class="mb-4 rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-700"
+          >
+            記事を取得
+          </button>
+          <div id="articleResult" class="max-h-96 overflow-y-auto rounded bg-gray-100 p-4 text-base">
+          </div>
+        </div>
+      </div>
+
+      <!-- 利用可能な記事一覧 -->
+      <div class="mt-8 rounded-lg bg-white p-6 shadow-md">
+        <h2 class="mb-4 text-xl font-semibold">利用可能な記事</h2>
+        <div id="availableArticles" class="text-base">
+          <p>記事一覧を取得して表示されます...</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 記事一覧を取得
+      document.getElementById('fetchArticles').addEventListener('click', async () => {
+        const resultDiv = document.getElementById('articlesResult')
+        resultDiv.innerHTML = '読み込み中...'
+
+        try {
+          const response = await fetch('/api/articles')
+          const data = await response.json()
+
+          if (data.success) {
+            resultDiv.innerHTML = `
+            <div class="text-green-600 font-semibold mb-2">✓ 成功</div>
+            <div class="mb-2">記事数: ${data.count}</div>
+            <pre class="whitespace-pre-wrap">${JSON.stringify(data.data, null, 2)}</pre>
+          `
+
+            // 利用可能な記事一覧を更新
+            updateAvailableArticles(data.data)
+          } else {
+            resultDiv.innerHTML = `
+            <div class="text-red-600 font-semibold mb-2">✗ エラー</div>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `
+          }
+        } catch (error) {
+          resultDiv.innerHTML = `
+          <div class="text-red-600 font-semibold mb-2">✗ エラー</div>
+          <div>${error.message}</div>
+        `
+        }
+      })
+
+      // 個別記事を取得
+      document.getElementById('fetchArticle').addEventListener('click', async () => {
+        const resultDiv = document.getElementById('articleResult')
+        const slug = document.getElementById('articleSlug').value
+
+        if (!slug) {
+          resultDiv.innerHTML = '<div class="text-red-600">スラッグを入力してください</div>'
+          return
+        }
+
+        resultDiv.innerHTML = '読み込み中...'
+
+        try {
+          const response = await fetch(`/api/articles/${slug}`)
+          const data = await response.json()
+
+          if (data.success) {
+            resultDiv.innerHTML = `
+            <div class="text-green-600 font-semibold mb-2">✓ 成功</div>
+            <div class="mb-2">
+              <strong>タイトル:</strong> ${data.data.title}<br>
+              <strong>著者:</strong> ${data.data.author || '未設定'}<br>
+              <strong>日付:</strong> ${data.data.date ? new Date(data.data.date).toLocaleDateString('ja-JP') : '未設定'}<br>
+              <strong>タグ:</strong> ${data.data.tags ? data.data.tags.join(', ') : 'なし'}
+            </div>
+            <div class="mt-4">
+              <strong>MDXコンテンツ:</strong>
+              <div class="mt-2 p-3 bg-white rounded border max-h-96 overflow-y-auto whitespace-pre-wrap text-base">${data.data.content}</div>
+            </div>
+          `
+          } else {
+            resultDiv.innerHTML = `
+            <div class="text-red-600 font-semibold mb-2">✗ エラー</div>
+            <pre>${JSON.stringify(data, null, 2)}</pre>
+          `
+          }
+        } catch (error) {
+          resultDiv.innerHTML = `
+          <div class="text-red-600 font-semibold mb-2">✗ エラー</div>
+          <div>${error.message}</div>
+        `
+        }
+      })
+
+      // 利用可能な記事一覧を更新
+      function updateAvailableArticles(articles) {
+        const container = document.getElementById('availableArticles')
+        if (articles.length === 0) {
+          container.innerHTML = '<p class="text-gray-500">記事が見つかりません</p>'
+          return
+        }
+
+        const articlesList = articles
+          .map(
+            (article) => `
+        <div class="mb-2 p-2 bg-gray-50 rounded">
+          <strong>${article.title}</strong><br>
+          <span class="text-gray-600">スラッグ: ${article.slug}</span>
+          ${article.description ? `<br><span class="text-gray-500">${article.description}</span>` : ''}
+        </div>
+      `
+          )
+          .join('')
+
+        container.innerHTML = articlesList
+      }
+
+      // ページ読み込み時に記事一覧を自動取得
+      window.addEventListener('load', () => {
+        document.getElementById('fetchArticles').click()
+      })
+    </script>
+  </body>
+</html>

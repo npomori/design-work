@@ -1,0 +1,56 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import ArticleEditPanel from '../../../components/article/ArticleEditPanel'
+
+interface Article {
+  id: string
+  slug: string
+  title?: string
+  description?: string
+  date?: string
+  author?: string
+  tags?: string[]
+  draft?: boolean
+  content: string
+}
+
+const { slug } = Astro.params
+let article: Article | null = null
+let error = ''
+
+try {
+  const res = await fetch(`${Astro.url.origin}/api/articles?all=1`)
+  const data = await res.json()
+  if (data.success) {
+    const found = (data.data as Article[]).find((a) => a.slug === slug)
+    if (found) article = found
+    else error = '記事が見つかりません'
+  } else {
+    error = data.error || '記事の取得に失敗しました'
+  }
+} catch {
+  error = 'サーバーエラーが発生しました'
+}
+
+if (!article && !error) {
+  return Astro.redirect('/admin/articles-editor')
+}
+---
+
+<Layout title={`編集: ${article?.title ?? slug}`}>
+  <section class="container mx-auto px-4 py-8">
+    <a href="/admin/articles-editor" class="mb-4 inline-block text-base text-blue-700 hover:underline"
+      >← 一覧に戻る</a
+    >
+
+    {
+      error && (
+        <div class="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-red-700">
+          {error}
+        </div>
+      )
+    }
+
+    {article && <ArticleEditPanel client:load article={article} />}
+  </section>
+</Layout>

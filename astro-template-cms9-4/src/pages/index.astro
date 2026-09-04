@@ -1,0 +1,352 @@
+---
+import Layout from '../layouts/Layout.astro'
+import ImageModal from '../components/ImageModal'
+import { media } from '../data/media'
+import { fieldNotes } from '../data/field-notes'
+import { fieldReports } from '../data/reports'
+import { getIssueRecord } from '../data/issue-record'
+import { urgentNotice } from '../data/urgent-notice'
+import { upcomingOutings } from '../data/schedule'
+import { newsItems } from '../data/news'
+import { openCalls } from '../data/calls'
+
+const latestNews = newsItems.slice(0, 3)
+
+const leadNote = fieldNotes[0]
+const issueRecord = getIssueRecord()
+
+const latestPosts = fieldReports.slice(0, 3).map((post, index) => ({
+  id: post.id,
+  content: post.content,
+  date: post.date,
+  author: post.author,
+  image: post.image,
+  likes: [24, 31, 18][index] ?? 12
+}))
+
+const photoGallery = [
+  { src: media.lead, alt: '苗を手に取って植える活動' },
+  { src: media.springPlanting, alt: 'みんなで苗を植え替える活動' },
+  { src: media.participant1, alt: '活動後に焚き火を囲む人たち' },
+  { src: media.participant2, alt: '森を眺めて交流する参加者' },
+  { src: media.participant3, alt: 'キャンプファイヤーを囲むボランティア' },
+  { src: media.soilHands, alt: '土と苗に触れる手' },
+  { src: media.forestMaintenance, alt: 'フィールドで清掃・保全に取り組む人たち' },
+  { src: media.forestSurvey, alt: '森の中を歩いて調査する人たち' }
+]
+---
+
+<Layout title="ホーム" isHome={true}>
+  <div class="mx-auto max-w-4xl">
+    {
+      urgentNotice && (
+        <section class="border-primary-200 bg-primary-50 mb-8 rounded-lg border p-4">
+          <p class="text-primary-800 text-base font-semibold">緊急のお知らせ</p>
+          <a href={urgentNotice.href} class="mt-1 flex flex-wrap items-baseline gap-3">
+            <span class="text-primary-600 font-bold">{urgentNotice.date}</span>
+            <span>{urgentNotice.title}</span>
+            <span class="text-primary-600 ml-auto text-base font-semibold">
+              お知らせを見る <i class="fas fa-arrow-right ml-1"></i>
+            </span>
+          </a>
+        </section>
+      )
+    }
+
+    {
+      leadNote && (
+        <section class="mb-16 overflow-hidden rounded-lg bg-white shadow-lg">
+          <div class="md:grid md:grid-cols-2">
+            <div class="flex flex-col">
+              <button
+                type="button"
+                class="block w-full"
+                data-src={leadNote.thumbnails[0] ?? media.forestMaintenance}
+                data-alt={leadNote.location}
+              >
+                <img
+                  src={leadNote.thumbnails[0] ?? media.forestMaintenance}
+                  alt={leadNote.location}
+                  class="h-72 w-full object-cover md:h-96"
+                />
+              </button>
+              <div class="grid grid-cols-3 gap-1 p-1">
+                {leadNote.thumbnails.slice(1, 4).map((thumb) => (
+                  <button type="button" data-src={thumb} data-alt={leadNote.location}>
+                    <img
+                      src={thumb}
+                      alt=""
+                      class="h-24 w-full object-cover md:h-28"
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div class="flex flex-col p-6 md:p-8">
+              <p class="text-primary-600 text-base font-semibold">最新の活動</p>
+              <h2 class="mt-2 text-3xl font-bold">{leadNote.location}</h2>
+              <dl class="mt-6 space-y-4 text-base">
+                <div>
+                  <dt class="font-medium text-gray-700">いつ</dt>
+                  <dd class="mt-0.5 text-gray-800">
+                    {new Date(leadNote.date).toLocaleDateString('ja-JP', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-gray-700">どこで</dt>
+                  <dd class="mt-0.5 text-gray-800">{leadNote.location}</dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-gray-700">何をした</dt>
+                  <dd class="mt-0.5 leading-relaxed text-gray-800">{leadNote.content}</dd>
+                </div>
+                <div>
+                  <dt class="font-medium text-gray-700">何人参加した</dt>
+                  <dd class="mt-0.5 text-gray-800">
+                    <span class="text-2xl font-bold">{leadNote.participants}名</span>
+                    {leadNote.participantsNote && (
+                      <span class="ml-2 text-gray-600">（{leadNote.participantsNote}）</span>
+                    )}
+                  </dd>
+                </div>
+              </dl>
+              <p class="mt-4 text-base text-gray-500">
+                {leadNote.category} · {leadNote.weather} · 報告 {leadNote.reporter}
+              </p>
+              <a
+                href="/activities"
+                class="text-primary-600 hover:text-primary-800 mt-6 inline-flex items-center font-semibold"
+              >
+                活動記録を見る
+                <i class="fas fa-arrow-right ml-1" />
+              </a>
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="mb-16">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">森で、こんな活動をしています</h2>
+        <a href="/activities" class="text-primary-600 hover:text-primary-800 font-semibold">
+          活動写真を見る <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+      <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+        {
+          photoGallery.map((item) => (
+            <button
+              type="button"
+              class="overflow-hidden rounded-lg shadow-md transition-shadow hover:shadow-xl"
+              data-src={item.src}
+              data-alt={item.alt}
+            >
+              <img
+                src={item.src}
+                alt={item.alt}
+                class="h-36 w-full object-cover md:h-40"
+                loading="lazy"
+              />
+            </button>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">最新の活動レポート</h2>
+        <a href="/blog" class="text-primary-600 hover:text-primary-800 font-semibold">
+          すべてのレポートを見る <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+        {
+          latestPosts.map((post) => (
+            <article class="overflow-hidden rounded-lg bg-white shadow-lg transition-shadow hover:shadow-xl">
+              <div class="relative">
+                <img src={post.image} alt="活動写真" class="h-48 w-full object-cover" />
+              </div>
+              <div class="p-4">
+                <div class="mb-2 flex items-center text-base text-gray-500">
+                  <i class="fas fa-calendar mr-2" />
+                  {new Date(post.date).toLocaleDateString('ja-JP')}
+                  <i class="fas fa-user mr-2 ml-4" />
+                  {post.author}
+                </div>
+                <p class="mb-4 line-clamp-3 text-base text-gray-600">{post.content}</p>
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center text-base text-gray-500">
+                    <i class="fas fa-heart mr-1 text-red-500" />
+                    <span>{post.likes}</span>
+                  </div>
+                  <a
+                    href={`/blog/${post.id}`}
+                    class="text-primary-600 hover:text-primary-800 inline-flex items-center text-base font-semibold"
+                  >
+                    詳細を見る
+                    <i class="fas fa-arrow-right ml-1" />
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="mb-16 rounded-lg bg-white p-6 shadow-lg">
+      <h2 class="mb-2 text-2xl font-bold">活動に参加してみませんか？</h2>
+      <p class="text-gray-700">森林ボランティアとして活動してみたい方へ</p>
+      <p class="mt-1 text-gray-600">初めての方も歓迎しています。</p>
+      <a
+        href="/schedule"
+        class="bg-primary-600 hover:bg-primary-700 mt-6 inline-flex items-center rounded-lg px-6 py-3 font-semibold text-white transition-colors"
+      >
+        活動に参加する
+        <i class="fas fa-arrow-right ml-2"></i>
+      </a>
+
+      <div class="mt-8 mb-2 flex items-center justify-between">
+        <h3 class="text-lg font-bold">活動予定</h3>
+        <a href="/schedule" class="text-primary-600 hover:text-primary-800 font-semibold">
+          予定表を見る <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+      <ul class="divide-y divide-gray-100">
+        {
+          upcomingOutings.map((outing) => (
+            <li>
+              <a href={outing.href} class="hover:text-primary-700 flex gap-x-3 py-3">
+                <span class="text-primary-600 w-11 shrink-0 font-bold">{outing.date}</span>
+                <span>
+                  {outing.title}
+                  <span class="block text-base text-gray-500">{outing.place}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <p class="mt-6 text-gray-600">
+        継続して関わりたい方は、<a
+          href="/join"
+          class="text-primary-600 hover:text-primary-800 font-semibold">入会の案内</a
+        >もご覧ください。
+      </p>
+    </section>
+
+    <section class="mb-16 rounded-lg bg-white p-6 shadow-lg">
+      <h2 class="mb-2 text-2xl font-bold">現在募集中</h2>
+      <p class="mb-6 text-gray-600">森林大学や講習会の受講生を募集しています。</p>
+      <ul class="divide-y divide-gray-100">
+        {
+          openCalls.map((call) => (
+            <li>
+              <a
+                href={call.href}
+                class="hover:text-primary-700 flex flex-wrap items-baseline gap-x-4 py-4"
+              >
+                <span class="text-primary-600 w-14 shrink-0 font-bold">{call.date}</span>
+                <span class="font-semibold">{call.title}</span>
+                <span class="ml-auto text-base text-gray-500">
+                  {[call.place, call.note].filter(Boolean).join(' · ')}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2">
+        <a href="/university" class="text-primary-600 hover:text-primary-800 font-semibold">
+          森林大学 <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+        <a href="/lectures" class="text-primary-600 hover:text-primary-800 font-semibold">
+          各種講習会 <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+    </section>
+
+    <section class="mb-16 rounded-lg bg-white p-5 shadow-md">
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="text-2xl font-bold">お知らせ</h2>
+        <a href="/news" class="text-primary-600 hover:text-primary-800 font-semibold">
+          すべてのお知らせを見る <i class="fas fa-arrow-right ml-1"></i>
+        </a>
+      </div>
+      <ul class="divide-y divide-gray-100">
+        {
+          latestNews.map((item) => (
+            <li>
+              <a href={`/news/${item.id}`} class="hover:text-primary-700 flex gap-x-3 py-3">
+                <span class="text-primary-600 w-11 shrink-0 font-bold">
+                  {new Date(item.date).getMonth() + 1}/{new Date(item.date).getDate()}
+                </span>
+                <span>
+                  {item.title}
+                  <span class="mt-0.5 block text-base text-gray-500">{item.category}</span>
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+      <a
+        href="/locations"
+        class="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl"
+      >
+        <p class="text-3xl font-bold">{issueRecord.locationCount}</p>
+        <p class="mt-1 text-gray-600">活動地域</p>
+      </a>
+      <div class="rounded-lg bg-white p-6 shadow-lg">
+        <p class="text-3xl font-bold">{issueRecord.totalParticipants}名</p>
+        <p class="mt-1 text-gray-600">延べ参加者</p>
+      </div>
+      <a
+        href="/activities"
+        class="rounded-lg bg-white p-6 shadow-lg transition-shadow hover:shadow-xl"
+      >
+        <p class="text-3xl font-bold">{issueRecord.outingCount}回</p>
+        <p class="mt-1 text-gray-600">記録した活動回数</p>
+      </a>
+    </section>
+  </div>
+
+  <ImageModal client:load />
+
+  <script>
+    const buttons = document.querySelectorAll('button[data-src]')
+    buttons.forEach((button) => {
+      button.addEventListener('click', function (this: HTMLButtonElement) {
+        const src = this.getAttribute('data-src')
+        const alt = this.getAttribute('data-alt')
+        if (src) {
+          window.dispatchEvent(
+            new CustomEvent('openImageModal', {
+              detail: { src, alt: alt ?? '' }
+            })
+          )
+        }
+      })
+    })
+  </script>
+
+  <style>
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</Layout>
